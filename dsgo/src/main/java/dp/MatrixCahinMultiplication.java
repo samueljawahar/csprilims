@@ -1,5 +1,7 @@
 package dp;
-
+/**
+ * This Matrix chain multiplication by Dynamic Programming
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
