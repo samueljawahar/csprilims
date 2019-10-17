@@ -1,4 +1,5 @@
 package trees;
+
 /**
  * 						THANK YOU JESUS
  */
@@ -67,12 +68,9 @@ public class StackUtil {
 	 */
 	public static void printinPostorder(TreeBuilder.Node root) {
 		/**
-		 * The order of stack operations
-		 * 1)push root
-		 * 2)push right
-		 * 3)push left
-		 * Now while popping Left-Right-Root a post order
-		 * since we are initially having root on the stack we need not do pushing of root
+		 * The order of stack operations 1)push root 2)push right 3)push left Now while
+		 * popping Left-Right-Root a post order since we are initially having root on
+		 * the stack we need not do pushing of root
 		 */
 		Stack callSt = new Stack();
 		callSt.push(root);
@@ -81,13 +79,13 @@ public class StackUtil {
 			aux = (TreeBuilder.Node) callSt.peek();
 			if (aux.right == null && aux.left == null) {
 				/**
-				 *The popped element is child of TOS or sibling of TOS
+				 * The popped element is child of TOS or sibling of TOS
 				 */
-				aux= (TreeBuilder.Node) callSt.pop();
+				aux = (TreeBuilder.Node) callSt.pop();
 				System.out.print(aux.data);
 				/**
 				 * Print as long as parent child relation exist between popped element and TOS
-				 *  Stop once sibling relation encounter between popped element and TOS
+				 * Stop once sibling relation encounter between popped element and TOS
 				 */
 				while (!callSt.isEmpty() && (((((TreeBuilder.Node) callSt.peek()).right != null)
 						&& ((TreeBuilder.Node) callSt.peek()).right.data.equals(aux.data))
@@ -98,7 +96,7 @@ public class StackUtil {
 				}
 				continue;
 			}
-		
+
 			if (aux.right != null) {
 				callSt.push(aux.right);
 			}
@@ -108,13 +106,15 @@ public class StackUtil {
 
 		}
 	}
-/**
- * This is based on PRE-ORDER Traversal
- * @param root
- * @param n1
- * @param n2
- * @return
- */
+
+	/**
+	 * This is based on PRE-ORDER Traversal
+	 * 
+	 * @param root
+	 * @param n1
+	 * @param n2
+	 * @return
+	 */
 	public String getLowestCommonAncestor(TreeBuilder.Node root, String n1, String n2) {
 		String result = "";
 		Stack<TreeBuilder.Node> callStack = new Stack<TreeBuilder.Node>();
@@ -153,9 +153,10 @@ public class StackUtil {
 							currentRoot = next.data;
 						} else {
 							/**
-							 * if the popped element has the sibling then the sibling is at Top-Of-Stack(TOS)
-							 * therefore the parent of the popped and its sibling is in the stack just below sibling
-							 * therefore pop the sibling get the Parent Info and then Push back the sibling since it is not yet processed
+							 * if the popped element has the sibling then the sibling is at
+							 * Top-Of-Stack(TOS) therefore the parent of the popped and its sibling is in
+							 * the stack just below sibling therefore pop the sibling get the Parent Info
+							 * and then Push back the sibling since it is not yet processed
 							 */
 							next = callStack.pop();
 							currentRoot = callStack.peek().data;
@@ -204,8 +205,10 @@ public class StackUtil {
 		TreeBuilder.Node node;
 		ArrayList<String> visited = new ArrayList<String>();
 	}
+
 	/**
-	 * This is based on the Depth-First-Search 
+	 * This is based on the Depth-First-Search
+	 * 
 	 * @param root
 	 * @param n1
 	 * @param n2
@@ -229,7 +232,7 @@ public class StackUtil {
 				if (aux.node.data.equalsIgnoreCase(n1) || aux.node.data.equalsIgnoreCase(n2)) {
 					if (cnt == 0) {
 						/**
-						 * This the first time the node in Question has pass by 
+						 * This the first time the node in Question has pass by
 						 */
 						currentRoot = callStack.peek().node.data;
 						cnt++;
@@ -261,14 +264,14 @@ public class StackUtil {
 				aux = callStack.pop();
 				if (currentRoot.equals(aux.node.data)) {
 					/**
-					 * Adjustment of root since the other one is not yet encountered 
+					 * Adjustment of root since the other one is not yet encountered
 					 */
 					currentRoot = callStack.peek().node.data;
 				}
 				if (aux.node.data.equalsIgnoreCase(n1) || aux.node.data.equalsIgnoreCase(n2)) {
 					if (cnt == 0) {
 						/**
-						 * This the first time the node in Question has pass by 
+						 * This the first time the node in Question has pass by
 						 */
 						currentRoot = callStack.peek().node.data;
 						cnt++;
@@ -415,25 +418,26 @@ public class StackUtil {
 		System.out.println("Enter node 2");
 		n2 = sc.nextLine();
 		System.out.println("The getLowestCommonAncestor of " + se.getLowestCommonAncestor(tu.root, n1, n2));
-		
+
 		System.out.println("The getNearestCommonAncestor of " + se.getNearestCommonAncestor(tu.root, n1, n2));
 
 	}
-public static void testPostOreder() {
 
+	public static void testPostOreder() {
 
-	TreeBuilder tu = null;
-	try {
-		tu = new TreeBuilder();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		TreeBuilder tu = null;
+		try {
+			tu = new TreeBuilder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StackUtil se = new StackUtil();
+		System.out.println("The post Order is:");
+		se.printinPostorder(tu.root);
+
 	}
-	StackUtil se = new StackUtil();
-	System.out.println("The post Order is:");
-	se.printinPostorder(tu.root);
 
-}
 	public static void main(String[] args) {
 		testCase3();
 		System.out.println("\nDone..");

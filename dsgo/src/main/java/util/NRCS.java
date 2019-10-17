@@ -1,7 +1,11 @@
 package util;
 
 
-//This is to extract the non repeated charterer String
+/**
+ * This is to extract the non repeated charterer String
+ * @author samuel
+ *
+ */
  
 public class NRCS {
 	public String getNRCStr(String data) {
@@ -34,7 +38,7 @@ public class NRCS {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		NRCS nrcs = new NRCS();
-		System.out.println(nrcs.getNRCStr("asdfghjklacvb"));
+		System.out.println(nrcs.getNRCStr("saasdfghjklascvb"));
 	}
 
 }
