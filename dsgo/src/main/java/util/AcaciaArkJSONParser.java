@@ -80,9 +80,7 @@ public class AcaciaArkJSONParser {
 			 * jsonFragment starts with { or [
 			 */
 			if (startChars[0] == jsonFragment.charAt(i) || startChars[1] == jsonFragment.charAt(i)) {
-				if ('{' == jsonFragment.charAt(i)) {
-					System.out.println("debug");
-				}
+			 
 				/*
 				 * Array stared
 				 */
