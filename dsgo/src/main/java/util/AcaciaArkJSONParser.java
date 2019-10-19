@@ -67,7 +67,7 @@ public class AcaciaArkJSONParser {
 	}
 
 	private void processData(String jsonData) {
-		String jsonFragment = previousData + jsonData;
+		String jsonFragment = jsonData;// previousData + jsonData;
 		jsonFragment = jsonFragment.trim();
 		int len = jsonFragment.length();
 		StringBuilder sb = new StringBuilder();
@@ -81,7 +81,7 @@ public class AcaciaArkJSONParser {
 			if (startChars[0] == jsonFragment.charAt(i) || startChars[1] == jsonFragment.charAt(i)) {
 				brac_curly_Stack.push(jsonFragment.charAt(i));
 				if (elements.size() != 0) {
-					keyStack.push(elements.get(elements.size() - 1));
+					keyStack.push(keyStack.peek() + "." + elements.get(elements.size() - 1));
 				} else {
 					keyStack.push("");
 				}
@@ -96,12 +96,14 @@ public class AcaciaArkJSONParser {
 				min = getMinof(openedCurlybracesIndex, closedCurlybracesIndex, openedBracketsIndex, closedBracketIndex);
 				if (closedCurlybracesIndex != -1 || closedBracketIndex != -1 || openedCurlybracesIndex != -1
 						|| openedBracketsIndex != -1) {
-					elements.addAll(getStringAsTokens(aux.substring(0, min)));
-					if (brac_curly_Stack.peek() == '{') {
-						updateDBwithMap(elements, keyStack.peek());
-					}
-					if (brac_curly_Stack.peek() == '[') {
-						updateDBwithArray(elements, keyStack.peek());
+					if (aux.substring(0, min).trim().length() != 0) {
+						elements.addAll(getStringAsTokens(aux.substring(0, min)));
+						if (brac_curly_Stack.peek() == '{') {
+							updateDBwithMap(elements, keyStack.peek());
+						}
+						if (brac_curly_Stack.peek() == '[') {
+							updateDBwithArray(elements, keyStack.peek());
+						}
 					}
 				}
 				i = i + min;
@@ -121,15 +123,18 @@ public class AcaciaArkJSONParser {
 				min = getMinof(openedCurlybracesIndex, closedCurlybracesIndex, openedBracketsIndex, closedBracketIndex);
 				if (closedCurlybracesIndex != -1 || closedBracketIndex != -1 || openedCurlybracesIndex != -1
 						|| openedBracketsIndex != -1) {
-					if (brac_curly_Stack.peek() == '{') {
-						updateDBwithMap(elements, keyStack.peek());
+					if (aux.substring(0, min).trim().length() != 0) {
+						elements.addAll(getStringAsTokens(aux.substring(0, min)));
+						if (brac_curly_Stack.peek() == '{') {
+							updateDBwithMap(elements, keyStack.peek());
+						}
+						if (brac_curly_Stack.peek() == '[') {
+							updateDBwithArray(elements, keyStack.peek());
+						}
 					}
-					if (brac_curly_Stack.peek() == '[') {
-						updateDBwithArray(elements, keyStack.peek());
-					}
+					i = i + min;
 				}
 
-				i = i + min;
 				brac_curly_Stack.pop();
 				keyStack.pop();
 			}
@@ -180,7 +185,7 @@ public class AcaciaArkJSONParser {
 	public void updateDBwithMap(ArrayList<String> elements, String key) {
 		int len = elements.size();
 		for (int i = 0; i + 1 < len; i = i + 2) {
-			dataBase.put(elements.get(i), elements.get(i + 1));
+			dataBase.put(key + "." + elements.get(i), elements.get(i + 1));
 		}
 
 	}
@@ -207,7 +212,7 @@ public class AcaciaArkJSONParser {
 		// TODO Auto-generated method stub
 		System.out.println("Jesus is Lord:Romans-10:9");
 		AcaciaArkJSONParser jp = new AcaciaArkJSONParser(
-				"/home/samuel/Documents/workspace-spring-tool-suite-4-4.1.1.RELEASE/dataStructures/example2.txt");
+				"/home/samuel/Documents/workspace-spring-tool-suite-4-4.1.1.RELEASE/dataStructures/example.json");
 	}
 
 }
