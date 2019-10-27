@@ -1,3 +1,5 @@
+package util;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.Stack;
 
-public class AcaciaArkJSONParser {
+public class AcaciaArkJSONParser_old {
 	File jsonFile = null;
 	Stack<String> keyStack = new Stack<String>();
 	Stack<Integer> indexStack = new Stack<Integer>();
@@ -23,7 +25,7 @@ public class AcaciaArkJSONParser {
 	String previousData = "{";
 	Integer arrayIndex = -1;
 
-	public AcaciaArkJSONParser(String fileNmae) {
+	public AcaciaArkJSONParser_old(String fileNmae) {
 		jsonFile = new File(fileNmae);
 		endChMap.put('{', '}');
 		endChMap.put('[', ']');
@@ -257,7 +259,7 @@ public class AcaciaArkJSONParser {
 		// TODO Auto-generated method stub
 		System.out.println("Jesus is Lord:Romans-10:9");
 		System.out.println("---------------------------------------");
-		AcaciaArkJSONParser jp = new AcaciaArkJSONParser(
+		AcaciaArkJSONParser_old jp = new AcaciaArkJSONParser_old(
 				"/home/samuel/Documents/workspace-spring-tool-suite-4-4.1.1.RELEASE/dataStructures/example2.json");
 	}
 
